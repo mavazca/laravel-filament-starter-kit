@@ -1,0 +1,40 @@
+{
+    "commit-msg": {
+        "enabled": false,
+        "actions": [
+            {
+                "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+                "options": []
+            }
+        ]
+    },
+    "pre-commit": {
+        "enabled": false,
+        "actions": [
+            {
+                "action": "./vendor/bin/sail artisan optimize:clear"
+            },
+            {
+                "action": "chmod -R 777 storage bootstrap/cache"
+            },
+            {
+                "action": "./vendor/bin/sail bin pint -v"
+            },
+            {
+                "action": "./vendor/bin/sail artisan test --coverage-html storage/app/coverage"
+            }
+        ]
+    },
+    "post-commit": {
+        "enabled": false,
+        "actions": [
+            {
+                "action": "git push"
+            }
+        ]
+    },
+    "pre-push": {
+        "enabled": false,
+        "actions": []
+    }
+}
