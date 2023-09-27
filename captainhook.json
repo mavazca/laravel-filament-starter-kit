@@ -9,19 +9,13 @@
         ]
     },
     "pre-commit": {
-        "enabled": false,
+        "enabled": true,
         "actions": [
             {
                 "action": "./vendor/bin/sail artisan optimize:clear"
             },
             {
                 "action": "chmod -R 777 storage bootstrap/cache"
-            },
-            {
-                "action": "./vendor/bin/sail bin pint -v"
-            },
-            {
-                "action": "./vendor/bin/sail artisan test --coverage-html storage/app/coverage"
             }
         ]
     },
@@ -34,7 +28,14 @@
         ]
     },
     "pre-push": {
-        "enabled": false,
-        "actions": []
+        "enabled": true,
+        "actions": [
+            {
+                "action": "./vendor/bin/sail bin pint --test"
+            },
+            {
+                "action": "./vendor/bin/sail artisan test --coverage-html storage/app/coverage"
+            }
+        ]
     }
 }
