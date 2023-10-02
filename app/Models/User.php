@@ -33,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         'password',
         'access_admin',
         'active',
+        'email_verified_at',
     ];
 
     /**
