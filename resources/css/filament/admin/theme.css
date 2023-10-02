@@ -1,0 +1,111 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config './tailwind.config.js';
+
+/**
+ * header logo
+ */
+.fi-sidebar-header {
+    @apply bg-primary-600 ring-primary-500;
+}
+
+.fi-sidebar-header .fi-icon-btn {
+    @apply text-sky-300;
+}
+
+.fi-sidebar-header .fi-icon-btn:hover, .fi-sidebar-header .fi-icon-btn:focus {
+    @apply text-white;
+}
+
+/**
+ * sidebar
+ */
+.fi-sidebar {
+    @apply bg-gradient-to-b dark:from-gray-950 dark:to-gray-800 from-primary-600 via-primary-500 to-sky-600 dark:bg-transparent;
+}
+
+.fi-sidebar-group div span {
+    @apply text-white;
+}
+
+.fi-sidebar-group .fi-icon-btn {
+    @apply text-sky-300;
+}
+
+.fi-sidebar-group .fi-icon-btn:hover, .fi-sidebar-group .fi-icon-btn:focus {
+    @apply text-white;
+}
+
+.fi-sidebar-item-icon {
+    @apply text-sky-300
+}
+
+.fi-sidebar-item a, .fi-sidebar-header a {
+    @apply text-white;
+}
+
+.fi-sidebar-item-label {
+    @apply text-white;
+}
+
+.fi-sidebar-item a:hover, .fi-sidebar-item a:focus {
+    @apply text-primary-50 bg-primary-700;
+}
+
+.fi-sidebar-item-active a {
+    @apply  bg-primary-700 bg-opacity-60;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-label {
+    @apply  font-extrabold;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-icon {
+    @apply text-primary-400;
+}
+
+/**
+ * main content
+ */
+.fi-main-ctn {
+    @apply bg-primary-50 bg-opacity-50 dark:bg-transparent;
+}
+
+/**
+ * badge
+ */
+.fi-badge{
+    @apply rounded-full;
+}
+
+/**
+ * button
+ */
+.fi-btn {
+    @apply ring-transparent shadow-gray-400 dark:shadow-gray-950;
+}
+
+/**
+ * sidebar scroll
+ */
+.fi-sidebar-nav::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 0;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 1rem;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar-thumb:hover, .fi-sidebar-nav::-webkit-scrollbar-thumb:focus {
+    @apply bg-primary-300;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar-thumb:focus {
+    @apply bg-primary-300;
+}

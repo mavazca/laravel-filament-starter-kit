@@ -34,8 +34,13 @@ class AdminPanelProvider extends PanelProvider
             ->emailVerification()
             ->profile()
             ->colors([
-                'primary' => Color::Amber,
+//                'primary' => Color::hex('#014bde'),
+                'primary' => Color::Emerald,
             ])
+            ->font('Nunito')
+            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->favicon(asset('images/favicon.svg'))
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
