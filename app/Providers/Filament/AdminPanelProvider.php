@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -18,6 +20,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -65,5 +68,37 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    public function boot(): void
+    {
+        Filament::registerNavigationGroups([
+            __('Administrative'),
+            __('Settings'),
+        ]);
+
+        Filament::serving(function () {
+            $navigationItem = [];
+
+            if (Gate::allows('manage debug')) {
+                $navigationItem[] = NavigationItem::make()
+                    ->label(__('Debug'))
+                    ->url(route('telescope'), shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-presentation-chart-line')
+                    ->activeIcon('heroicon-s-presentation-chart-line')
+                    ->group(__('Settings'));
+            }
+
+            if (Gate::allows('manage queue')) {
+                $navigationItem[] = NavigationItem::make()
+                    ->label(__('Queue'))
+                    ->url(route('horizon.index'), shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-queue-list')
+                    ->activeIcon('heroicon-s-queue-list')
+                    ->group(__('Settings'));
+            }
+
+            Filament::registerNavigationItems($navigationItem);
+        });
     }
 }
