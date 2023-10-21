@@ -72,5 +72,7 @@
     "You're logged in!": "You're logged in!",
     "Your email address is unverified.": "Your email address is unverified.",
     "Settings": "Settings",
-    "Administrative": "Administrative"
+    "Administrative": "Administrative",
+    "Debug": "Debug",
+    "Queue": "Queue"
 }

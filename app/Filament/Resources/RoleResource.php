@@ -18,7 +18,7 @@ class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
     protected static ?int $navigationSort = 2;
 
@@ -33,12 +33,14 @@ class RoleResource extends Resource
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('name')
+                        ->label(__('role.name'))
                         ->minLength(2)
                         ->maxLength(255)
                         ->required()
                         ->unique(ignoreRecord: true),
 
                     Forms\Components\Select::make('permissions')
+                        ->label(__('role.permissions'))
                         ->multiple()
                         ->relationship('permissions', 'name')
                         ->searchable()
@@ -53,23 +55,25 @@ class RoleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('role.name'))
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('permissions_count')
+                    ->label(__('role.permissions_count'))
                     ->badge()
                     ->counts('permissions')
                     ->color('primary'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('Created'))
+                    ->label(__('role.created'))
                     ->since()
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('Updated'))
+                    ->label(__('role.updated'))
                     ->since()
                     ->sortable()
                     ->searchable()
@@ -108,5 +112,15 @@ class RoleResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('id', '!=', Role::SUPER_ADMIN);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('role.role');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('role.roles');
     }
 }

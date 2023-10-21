@@ -9,6 +9,10 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+
+use function Filament\Support\get_model_label;
+use function Filament\Support\locale_has_pluralization;
 
 class RolesRelationManager extends RelationManager
 {
@@ -20,6 +24,7 @@ class RolesRelationManager extends RelationManager
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('name')
+                        ->label(__('role.name'))
                         ->required()
                         ->maxLength(255),
                 ]),
@@ -31,7 +36,8 @@ class RolesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('role.name')),
             ])
             ->filters([
                 //
@@ -48,5 +54,15 @@ class RolesRelationManager extends RelationManager
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('role.role');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('role.roles');
     }
 }

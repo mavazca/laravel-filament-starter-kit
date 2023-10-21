@@ -20,6 +20,7 @@ class PermissionsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('name')
+                        ->label(__('permission.name'))
                         ->required()
                         ->maxLength(255),
                 ]),
@@ -31,7 +32,8 @@ class PermissionsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('permissions.name'),
             ])
             ->filters([
                 //
@@ -48,5 +50,15 @@ class PermissionsRelationManager extends RelationManager
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('permission.permission');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('permission.permissions');
     }
 }

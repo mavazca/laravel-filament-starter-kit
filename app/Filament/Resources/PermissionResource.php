@@ -31,6 +31,7 @@ class PermissionResource extends Resource
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('name')
+                        ->label(__('permission.name'))
                         ->minLength(2)
                         ->maxLength(255)
                         ->required()
@@ -44,18 +45,19 @@ class PermissionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('permission.name'))
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('Created'))
+                    ->label(__('permission.created'))
                     ->since()
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('Updated'))
+                    ->label(__('permission.updated'))
                     ->since()
                     ->sortable()
                     ->searchable()
@@ -89,5 +91,15 @@ class PermissionResource extends Resource
             'create' => Pages\CreatePermission::route('/create'),
             'edit' => Pages\EditPermission::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('permission.permission');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('permission.permissions');
     }
 }

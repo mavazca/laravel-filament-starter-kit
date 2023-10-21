@@ -40,15 +40,18 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\TextInput::make('name')
+                        ->label(__('user.name'))
                         ->required()
                         ->maxLength(255),
 
                     Forms\Components\TextInput::make('email')
+                        ->label(__('user.email'))
                         ->email()
                         ->required()
                         ->maxLength(255),
 
                     Forms\Components\TextInput::make('password')
+                        ->label(__('user.password'))
                         ->password()
                         ->maxLength(255)
                         ->dehydrateStateUsing(
@@ -59,26 +62,33 @@ class UserResource extends Resource
                         ->label(
                             static fn (
                                 Page $livewire
-                            ): string => ($livewire instanceof EditUser) ? 'New Password' : 'Password'
+                            ): string => ($livewire instanceof EditUser) ? __('user.new_password') : __('user.password')
                         ),
 
-                    Forms\Components\DateTimePicker::make('email_verified_at'),
+                    Forms\Components\DateTimePicker::make('email_verified_at')
+                        ->label(__('user.email_verified_at')),
 
                     Forms\Components\Select::make('roles')
+                        ->label(__('user.roles'))
                         ->multiple()
                         ->relationship('roles', 'name')
                         ->searchable()
                         ->preload(),
 
                     Forms\Components\Select::make('permissions')
+                        ->label(__('user.permissions'))
                         ->multiple()
                         ->relationship('permissions', 'name')
                         ->searchable()
                         ->preload(),
 
-                    Forms\Components\Toggle::make('is_active')->default(true),
+                    Forms\Components\Toggle::make('is_active')
+                        ->label(__('user.is_active'))
+                        ->default(true),
 
-                    Forms\Components\Toggle::make('is_admin'),
+                    Forms\Components\Toggle::make('is_admin')
+                        ->label(__('user.is_admin')),
+
                 ])->columns(2),
             ]);
     }
@@ -88,57 +98,71 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('user.name'))
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\IconColumn::make('is_admin')
+                    ->label(__('user.is_admin'))
                     ->boolean()
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('roles.name')
+                    ->label(__('user.roles'))
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('email')
+                    ->label(__('user.email'))
                     ->sortable()
                     ->searchable(),
 
                 Auth::user()->can('update user') ?
                     Tables\Columns\ToggleColumn::make('is_active')
+                        ->label(__('user.is_active'))
                         ->sortable()
                         ->searchable()
                         ->toggleable() :
                     Tables\Columns\IconColumn::make('is_active')
+                        ->label(__('user.is_active'))
                         ->boolean()
                         ->sortable()
                         ->searchable()
                         ->toggleable(),
 
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
+                Tables\Columns\IconColumn::make('email_verified_at')
+                    ->label(__('user.email_verified_at'))
+                    ->boolean()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('user.created'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('user.updated'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('user.deleted'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\TernaryFilter::make('is_admin'),
-                Tables\Filters\TernaryFilter::make('is_active'),
+                Tables\Filters\TernaryFilter::make('is_admin')
+                    ->label(__('user.is_admin')),
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label(__('user.is_active')),
+                Tables\Filters\TernaryFilter::make('email_verified_at')
+                    ->label(__('user.email_verified_at')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -176,5 +200,15 @@ class UserResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('user.user');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('user.users');
     }
 }

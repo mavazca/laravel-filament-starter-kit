@@ -72,5 +72,7 @@
     "You're logged in!": "Você está logado!",
     "Your email address is unverified.": "Seu endereço de e-mail não foi verificado.",
     "Settings": "Configurações",
-    "Administrative": "Administrativo"
+    "Administrative": "Administrativo",
+    "Debug": "Depurar",
+    "Queue": "Fila"
 }
