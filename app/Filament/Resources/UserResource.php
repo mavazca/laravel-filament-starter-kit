@@ -76,9 +76,9 @@ class UserResource extends Resource
                         ->searchable()
                         ->preload(),
 
-                    Forms\Components\Toggle::make('active')->default(true),
+                    Forms\Components\Toggle::make('is_active')->default(true),
 
-                    Forms\Components\Toggle::make('access_admin'),
+                    Forms\Components\Toggle::make('is_admin'),
                 ])->columns(2),
             ]);
     }
@@ -91,16 +91,10 @@ class UserResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Auth::user()->can('update user') ?
-                    Tables\Columns\ToggleColumn::make('access_admin')
-                        ->sortable()
-                        ->searchable() :
-                    Tables\Columns\IconColumn::make('access_admin')
-                        ->boolean()
-                        ->trueIcon('heroicon-o-check')
-                        ->falseIcon('heroicon-o-x-mark')
-                        ->sortable()
-                        ->searchable(),
+                Tables\Columns\IconColumn::make('is_admin')
+                    ->boolean()
+                    ->sortable()
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('roles.name')
                     ->sortable()
@@ -109,6 +103,17 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
+
+                Auth::user()->can('update user') ?
+                    Tables\Columns\ToggleColumn::make('is_active')
+                        ->sortable()
+                        ->searchable()
+                        ->toggleable() :
+                    Tables\Columns\IconColumn::make('is_active')
+                        ->boolean()
+                        ->sortable()
+                        ->searchable()
+                        ->toggleable(),
 
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
@@ -129,16 +134,11 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
-                Tables\Columns\IconColumn::make('active')
-                    ->boolean()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\TernaryFilter::make('access_admin'),
-                Tables\Filters\TernaryFilter::make('active'),
+                Tables\Filters\TernaryFilter::make('is_admin'),
+                Tables\Filters\TernaryFilter::make('is_active'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

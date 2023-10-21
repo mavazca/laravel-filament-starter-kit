@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
                     'email' => 'test' . $i . '@test.com',
                     'email_verified_at' => now(),
                     'password' => Hash::make('12345678'),
-                    'access_admin' => 0,
-                    'active' => fake()->boolean(),
+                    'is_admin' => 0,
+                    'is_active' => fake()->boolean(),
                     'remember_token' => Str::random(10),
                 ])->assignRole('user');
             }

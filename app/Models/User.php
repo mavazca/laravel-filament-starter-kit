@@ -31,8 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         'name',
         'email',
         'password',
-        'access_admin',
-        'active',
+        'is_admin',
+        'is_active',
         'email_verified_at',
     ];
 
@@ -58,6 +58,6 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->access_admin || $this->hasRole(Role::SUPER_ADMIN);
+        return $this->is_admin || $this->hasRole(Role::SUPER_ADMIN);
     }
 }

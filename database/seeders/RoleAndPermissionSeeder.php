@@ -109,8 +109,8 @@ class RoleAndPermissionSeeder extends Seeder
             'email' => env('APP_ADMIN_EMAIL', 'super@super.com'),
             'email_verified_at' => now(),
             'password' => Hash::make(env('APP_ADMIN_PASSWORD', '12345678')),
-            'access_admin' => 1,
-            'active' => 1,
+            'is_admin' => 1,
+            'is_active' => 1,
             'remember_token' => Str::random(10),
         ])->assignRole($superAdminRole);
 
@@ -119,8 +119,8 @@ class RoleAndPermissionSeeder extends Seeder
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make(env('APP_ADMIN_PASSWORD', '12345678')),
-            'access_admin' => 1,
-            'active' => 1,
+            'is_admin' => 1,
+            'is_active' => 1,
             'remember_token' => Str::random(10),
         ])->assignRole($adminRole);
 
@@ -129,8 +129,8 @@ class RoleAndPermissionSeeder extends Seeder
             'email' => 'moderator@moderator.com',
             'email_verified_at' => now(),
             'password' => Hash::make(env('APP_ADMIN_PASSWORD', '12345678')),
-            'access_admin' => 1,
-            'active' => 1,
+            'is_admin' => 1,
+            'is_active' => 1,
             'remember_token' => Str::random(10),
         ])->assignRole($moderatorRole);
 
@@ -139,8 +139,8 @@ class RoleAndPermissionSeeder extends Seeder
             'email' => 'developer@developer.com',
             'email_verified_at' => now(),
             'password' => Hash::make(env('APP_ADMIN_PASSWORD', '12345678')),
-            'access_admin' => 1,
-            'active' => 1,
+            'is_admin' => 1,
+            'is_active' => 1,
             'remember_token' => Str::random(10),
         ])->assignRole($developerRole);
     }
