@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "bezhansalleh/filament-language-switch": "^2.0",
         "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
@@ -19,7 +20,8 @@
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.0",
         "shuvroroy/filament-spatie-laravel-backup": "^2.0",
-        "spatie/laravel-permission": "^5.11"
+        "spatie/laravel-permission": "^5.11",
+        "stijnvanouplines/blade-country-flags": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

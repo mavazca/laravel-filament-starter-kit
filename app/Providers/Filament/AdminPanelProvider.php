@@ -7,6 +7,7 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Backups;
 use App\Http\Middleware\RedirectNotActiveUser;
+use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -74,11 +75,17 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugin(
+            ->plugins([
                 FilamentSpatieLaravelBackupPlugin::make()
                     ->usingPolingInterval('10s') // default value is 4s
-                    ->usingPage(Backups::class)
-            );
+                    ->usingPage(Backups::class),
+
+                FilamentLanguageSwitchPlugin::make(),
+            ])
+            ->navigationGroups([
+                'Administrative',
+                'Settings',
+            ]);
     }
 
     public function boot(): void
