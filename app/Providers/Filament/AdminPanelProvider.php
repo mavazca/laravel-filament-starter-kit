@@ -27,6 +27,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -41,7 +42,6 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->passwordReset()
             ->emailVerification()
-            ->profile()
             ->colors([
 //                'primary' => Color::hex('#014bde'),
                 'primary' => Color::Emerald,
@@ -79,8 +79,15 @@ class AdminPanelProvider extends PanelProvider
                 FilamentSpatieLaravelBackupPlugin::make()
                     ->usingPolingInterval('10s') // default value is 4s
                     ->usingPage(Backups::class),
-
                 FilamentLanguageSwitchPlugin::make(),
+                BreezyCore::make()
+                    ->myProfile(
+                        hasAvatars: true,
+                        slug: 'profile',
+                    )
+                    ->avatarUploadComponent(fn ($fileUpload) => $fileUpload->disableLabel())
+                    ->enableTwoFactorAuthentication()
+                    ->enableSanctumTokens(),
             ])
             ->navigationGroups([
                 'Administrative',
