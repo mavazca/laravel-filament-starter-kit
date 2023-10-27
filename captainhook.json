@@ -15,7 +15,7 @@
                 "action": "./vendor/bin/sail artisan optimize:clear"
             },
             {
-                "action": "chmod -R 777 storage bootstrap/cache"
+                "action": "chmod -R 755 storage bootstrap/cache"
             }
         ]
     },
@@ -32,6 +32,9 @@
         "actions": [
             {
                 "action": "./vendor/bin/sail bin pint --test"
+            },
+            {
+                "action": "./vendor/bin/sail bin phpstan analyse"
             },
             {
                 "action": "./vendor/bin/sail artisan test --coverage-html storage/app/coverage"
