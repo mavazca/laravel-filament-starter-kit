@@ -74,5 +74,13 @@
     "Settings": "Configuraciones",
     "Administrative": "Administrativo",
     "Debug": "Depurar",
-    "Queue": "Cola"
+    "Queue": "Cola",
+    "Total users": "Total de usuarios",
+    "Total users in app": "Usuarios totales en la aplicación",
+    "Total roles": "Roles totales",
+    "Total roles in app": "Roles totales en la aplicación",
+    "Total permissions": "Permisos totales",
+    "Total permissions in app": "Permisos totales en la aplicación",
+    "Users created": "Usuarios creados",
+    "Users created per month": "Usuarios creados por mes"
 }

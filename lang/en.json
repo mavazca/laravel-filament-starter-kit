@@ -74,5 +74,13 @@
     "Settings": "Settings",
     "Administrative": "Administrative",
     "Debug": "Debug",
-    "Queue": "Queue"
+    "Queue": "Queue",
+    "Total users": "Total users",
+    "Total users in app": "Total users in app",
+    "Total roles": "Total roles",
+    "Total roles in app": "Total roles in app",
+    "Total permissions": "Total permissions",
+    "Total permissions in app": "Total permissions in app",
+    "Users created": "Users created",
+    "Users created per month": "Users created per month"
 }
